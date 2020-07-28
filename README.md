@@ -1,4 +1,4 @@
-# Welcome to your CDK TypeScript project!
+# Simple CDK stack with Fargate scaling on SQS queue and time (scheduled action)
 
 You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`SqsFargateStack`)
 which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
