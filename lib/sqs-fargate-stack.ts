@@ -57,6 +57,7 @@ export class SqsFargateStack extends cdk.Stack {
       //image: ecs.ContainerImage.fromEcrRepository(ecr.Repository.fromRepositoryArn(this, 'sleeper', 'arn:aws:ecr:eu-west-1:857610115750:repository/sleeper'), 'latest'),
       image: ecs.ContainerImage.fromAsset(path.join(__dirname, "..", "simple-web-service")),
       logging: ecs.LogDrivers.awsLogs({ streamPrefix: "SqsFargate" }),
+      stopTimeout: cdk.Duration.seconds(120),
     });
     // Add port to container definition
     container.addPortMappings({
@@ -84,6 +85,7 @@ export class SqsFargateStack extends cdk.Stack {
     // Generating metric
     let scalingMetric = new cw.MathExpression({
       expression: "messagesVisible + messagesNotVisible",
+      period: cdk.Duration.minutes(1),
       usingMetrics: {
         messagesVisible: queue.metricApproximateNumberOfMessagesVisible(),
         messagesNotVisible: queue.metricApproximateNumberOfMessagesNotVisible()
@@ -94,7 +96,7 @@ export class SqsFargateStack extends cdk.Stack {
     const scalingTarget = service.autoScaleTaskCount({ maxCapacity: 50, minCapacity: 0 });
     scalingTarget.scaleOnMetric('QueueMessagesScaling', {
       metric: scalingMetric,
-      cooldown: cdk.Duration.seconds(60),
+      cooldown: cdk.Duration.minutes(1),
       scalingSteps: [
         { lower: 0, upper: 0, change: -10 },
         { lower: 1, upper: 10, change: +1 },
