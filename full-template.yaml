@@ -616,11 +616,11 @@ Resources:
       ScheduledActions:
         - ScalableTargetAction:
             MinCapacity: 50
-          Schedule: cron(0 0 * * * ? *)
+          Schedule: cron(0 0 * * ? *)
           ScheduledActionName: MidnightBatchProcessingUp
         - ScalableTargetAction:
             MinCapacity: 0
-          Schedule: cron(0 2 * * * ? *)
+          Schedule: cron(0 2 * * ? *)
           ScheduledActionName: MidnightBatchProcessingDown
     Metadata:
       aws:cdk:path: SqsFargateStack/service/TaskCount/Target/Resource

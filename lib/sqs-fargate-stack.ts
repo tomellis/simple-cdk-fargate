@@ -109,14 +109,14 @@ export class SqsFargateStack extends cdk.Stack {
     // Scale-up at mightnight
     scalingTarget.scaleOnSchedule('MidnightBatchProcessingUp', {
       schedule: {
-        expressionString: 'cron(0 0 * * * ? *)' // https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions 
+        expressionString: 'cron(0 0 * * ? *)' // https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
       },
       minCapacity: 50,
     });
     // Scale-down at 2am
     scalingTarget.scaleOnSchedule('MidnightBatchProcessingDown', {
       schedule: {
-        expressionString: 'cron(0 2 * * * ? *)'
+        expressionString: 'cron(0 2 * * ? *)'
       },
       minCapacity: 0,
     });
