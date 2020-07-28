@@ -453,6 +453,7 @@ Resources:
           PortMappings:
             - ContainerPort: 80
               Protocol: tcp
+          StopTimeout: 120
       Cpu: "256"
       ExecutionRoleArn:
         Fn::GetAtt:
