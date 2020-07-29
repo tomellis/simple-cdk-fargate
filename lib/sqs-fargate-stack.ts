@@ -106,12 +106,13 @@ export class SqsFargateStack extends cdk.Stack {
     });
 
     //// Scaling based on time - https://docs.aws.amazon.com/cdk/api/latest/docs/@aws-cdk_aws-applicationautoscaling.ScalableTarget.html
-    // Scale-up at mightnight
+    // Scale-up at mightnight - time is in UTC
     scalingTarget.scaleOnSchedule('MidnightBatchProcessingUp', {
       schedule: {
         expressionString: 'cron(0 0 * * ? *)' // https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
       },
       minCapacity: 50,
+      maxCapacity: 50,
     });
     // Scale-down at 2am
     scalingTarget.scaleOnSchedule('MidnightBatchProcessingDown', {
