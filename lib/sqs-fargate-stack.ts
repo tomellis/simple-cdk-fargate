@@ -119,6 +119,7 @@ export class SqsFargateStack extends cdk.Stack {
         expressionString: 'cron(0 2 * * ? *)'
       },
       minCapacity: 0,
+      maxCapacity: 2,
     });
 
   }

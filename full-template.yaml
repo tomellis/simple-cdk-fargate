@@ -619,6 +619,7 @@ Resources:
           Schedule: cron(0 0 * * ? *)
           ScheduledActionName: MidnightBatchProcessingUp
         - ScalableTargetAction:
+            MaxCapacity: 2
             MinCapacity: 0
           Schedule: cron(0 2 * * ? *)
           ScheduledActionName: MidnightBatchProcessingDown
