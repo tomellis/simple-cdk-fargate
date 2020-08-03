@@ -112,7 +112,7 @@ export class SqsFargateStack extends cdk.Stack {
         expressionString: 'cron(0 0 * * ? *)' // https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
       },
       minCapacity: 50,
-      maxCapacity: 50,
+      maxCapacity: 60,
     });
     // Scale-down at 2am
     scalingTarget.scaleOnSchedule('MidnightBatchProcessingDown', {

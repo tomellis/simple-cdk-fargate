@@ -615,6 +615,7 @@ Resources:
       ServiceNamespace: ecs
       ScheduledActions:
         - ScalableTargetAction:
+            MaxCapacity: 60
             MinCapacity: 50
           Schedule: cron(0 0 * * ? *)
           ScheduledActionName: MidnightBatchProcessingUp
